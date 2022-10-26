@@ -6,4 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CheckItemMapper extends BaseMapper<CheckItem> {
+    public long findCountByCheckItemId(Integer id);
 }

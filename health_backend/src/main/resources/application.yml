@@ -16,7 +16,8 @@ dubbo:
     address: zookeeper://175.178.108.7:2181
     ## 设置连接超时时间 60s
     timeout: 60000
-
+  consumer:
+    check: false
 
 mybatis-plus:
   configuration:

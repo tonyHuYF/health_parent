@@ -45,4 +45,17 @@ public class CheckItemServiceImpl implements CheckItemService {
                 new Page<>(queryPageBean.getCurrentPage(), queryPageBean.getPageSize()), wrapper);
         return new PageResult(page.getTotal(), page.getRecords());
     }
+
+    /**
+     * 删除
+     */
+    @Override
+    public void deleteById(Integer id) {
+        //如果已关联检查组，不允许删除
+        long count = checkItemMapper.findCountByCheckItemId(id);
+        if (count > 0) {
+            throw new RuntimeException("已关联检查组，无法删除");
+        }
+        checkItemMapper.deleteById(id);
+    }
 }

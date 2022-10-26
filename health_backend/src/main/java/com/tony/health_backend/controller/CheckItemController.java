@@ -7,10 +7,7 @@ import com.tony.health_common.entity.Result;
 import com.tony.health_common.pojo.CheckItem;
 import com.tony.health_interface.service.CheckItemService;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -46,5 +43,21 @@ public class CheckItemController {
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
         PageResult page = checkItemService.findPage(queryPageBean);
         return page;
+    }
+
+    /**
+     * 删除
+     */
+    @GetMapping("/delete")
+    public Result delete(Integer id) {
+        try {
+            checkItemService.deleteById(id);
+        } catch (Exception e) {
+            //调用失败
+            e.printStackTrace();
+            return new Result(false, MessageConstant.DELETE_CHECKITEM_FAIL);
+        }
+
+        return new Result(true, MessageConstant.DELETE_CHECKITEM_SUCCESS);
     }
 }
