@@ -233,6 +233,26 @@
         methods: {
             //编辑
             handleEdit() {
+                //表单校验
+                this.$refs['dataEditForm'].validate((valid) => {
+                    if (valid) {
+                        axios.post("/checkitem/edit", this.formData).then((res) => {
+                            if (res.data.flag) {
+                                this.$message({
+                                    message: res.data.message,
+                                    type: 'success'
+                                });
+                            } else {
+                                this.$message.error(res.data.message);
+                            }
+                        }).finally(() => {
+                            //成功与失败，都要调用分页
+                            this.findPage();
+                            //隐藏编辑窗口
+                            this.dialogFormVisible4Edit = false;
+                        });
+                    }
+                });
             },
             //添加
             handleAdd() {
@@ -286,6 +306,14 @@
             },
             // 弹出编辑窗口
             handleUpdate(row) {
+                this.dialogFormVisible4Edit = true;
+                axios.get("/checkitem/findById?id=" + row.id).then((res) => {
+                    if (res.data.flag) {
+                        this.formData = res.data.data;
+                    } else {
+                        this.$message.error(res.data.message);
+                    }
+                });
             },
             //切换页码
             handleCurrentChange(currentPage) {

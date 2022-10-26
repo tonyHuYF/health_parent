@@ -58,4 +58,20 @@ public class CheckItemServiceImpl implements CheckItemService {
         }
         checkItemMapper.deleteById(id);
     }
+
+    /**
+     * 编辑
+     */
+    @Override
+    public void edit(CheckItem checkItem) {
+        checkItemMapper.updateById(checkItem);
+    }
+
+    /**
+     * 单条查询
+     */
+    @Override
+    public CheckItem findById(Integer id) {
+        return checkItemMapper.selectById(id);
+    }
 }
