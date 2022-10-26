@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://cdn.staticfile.org/vue/2.6.14/vue.min.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <el-table :data="tableData" stripe>
+        <el-table-column prop="date" label="日期"></el-table-column>
+        <el-table-column prop="name" label="姓名"></el-table-column>
+        <el-table-column prop="address" label="地址"></el-table-column>
+        <el-table-column lable="操作" align="center">
+            <template slot-scope="scope">
+                <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
+                <el-button type="danger" size="mini" @click="handleDelete(scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            tableData: [
+                {date: '2022-10-01', name: '小明', address: '北京'},
+                {date: '2022-10-02', name: '小放', address: '上海'},
+                {date: '2022-10-03', name: '小说', address: '广东'}
+            ]
+        },
+        methods: {
+            handleUpdate(row) {
+                alert(row.name);
+            },
+            handleDelete(row) {
+                alert(row.address);
+            }
+        }
+    });
+</script>
+
+
+</body>
+
+
+</html>

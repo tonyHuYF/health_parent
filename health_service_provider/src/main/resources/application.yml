@@ -1,0 +1,30 @@
+server:
+  port: 9001
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://175.178.108.7:3306/health?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&serverTimezone=Hongkong&allowMultiQueries=true&nullCatalogMeansCurrent=true
+      username: root
+      password: TT9pC9oNq8y!&BMq
+
+## 配置dubbo
+dubbo:
+  application:
+    name: health-service-provider
+  ## 配置注册中心
+  registry:
+    address: zookeeper://175.178.108.7:2181
+    ## 设置连接超时时间 60s
+    timeout: 60000
+  ## 协议
+  protocol:
+    name: dubbo
+    port: 20880
+  scan:
+    base-packages: com.tony.health_service_provider.service
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
