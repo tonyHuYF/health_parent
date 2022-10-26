@@ -9,6 +9,8 @@ import com.tony.health_interface.service.CheckItemService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * 检查项管理
@@ -78,13 +80,28 @@ public class CheckItemController {
     }
 
     /**
-     * 单挑查询
+     * 单条查询
      */
     @GetMapping("/findById")
     public Result findById(Integer id) {
         try {
             CheckItem checkItem = checkItemService.findById(id);
             return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItem);
+        } catch (Exception e) {
+            //调用失败
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
+        }
+    }
+
+    /**
+     * 查询所有
+     */
+    @GetMapping("/findAll")
+    public Result findAll() {
+        try {
+            List<CheckItem> checkItems = checkItemService.findAll();
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS, checkItems);
         } catch (Exception e) {
             //调用失败
             e.printStackTrace();

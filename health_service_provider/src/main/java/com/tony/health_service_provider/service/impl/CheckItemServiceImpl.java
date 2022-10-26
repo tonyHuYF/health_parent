@@ -12,6 +12,7 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 检查项服务
@@ -73,5 +74,13 @@ public class CheckItemServiceImpl implements CheckItemService {
     @Override
     public CheckItem findById(Integer id) {
         return checkItemMapper.selectById(id);
+    }
+
+    /**
+     * 查询所有
+     */
+    @Override
+    public List<CheckItem> findAll() {
+        return checkItemMapper.selectList(null);
     }
 }
