@@ -95,4 +95,12 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         checkGroupMapper.deleteCheckItemByCheckGroupId(id);
         checkGroupMapper.deleteById(id);
     }
+
+    /**
+     * 查询所有
+     */
+    @Override
+    public List<CheckGroup> findAll() {
+        return checkGroupMapper.selectList(null);
+    }
 }
