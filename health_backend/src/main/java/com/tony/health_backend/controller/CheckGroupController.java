@@ -1,14 +1,15 @@
 package com.tony.health_backend.controller;
 
 import com.tony.health_common.constant.MessageConstant;
+import com.tony.health_common.entity.PageResult;
+import com.tony.health_common.entity.QueryPageBean;
 import com.tony.health_common.entity.Result;
 import com.tony.health_common.pojo.CheckGroup;
 import com.tony.health_interface.service.CheckGroupService;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 检查组管理
@@ -25,7 +26,7 @@ public class CheckGroupController {
     @PostMapping("/add")
     public Result add(@RequestBody CheckGroup checkGroup, Integer[] checkitemIds) {
         try {
-            checkGroupService.add(checkGroup,checkitemIds);
+            checkGroupService.add(checkGroup, checkitemIds);
         } catch (Exception e) {
             //调用失败
             e.printStackTrace();
@@ -33,6 +34,45 @@ public class CheckGroupController {
         }
 
         return new Result(true, MessageConstant.ADD_CHECKGROUP_SUCCESS);
+    }
+
+    /**
+     * 单条查询
+     */
+    @GetMapping("/findById")
+    public Result findById(Integer id) {
+        try {
+            CheckGroup checkGroup = checkGroupService.findById(id);
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, checkGroup);
+        } catch (Exception e) {
+            //调用失败
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
+
+    /**
+     * 分页查询
+     */
+    @PostMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+        PageResult page = checkGroupService.findPage(queryPageBean);
+        return page;
+    }
+
+    /**
+     * 根据检查组查检查项信息
+     */
+    @GetMapping("/findCheckItemIdByCheckGroupId")
+    public Result findCheckItemIdByCheckGroupId(Integer id) {
+        try {
+            List<Integer> data = checkGroupService.findCheckItemIdByCheckGroupId(id);
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, data);
+        } catch (Exception e) {
+            //调用失败
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
     }
 
 }

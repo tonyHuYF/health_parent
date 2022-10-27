@@ -304,6 +304,15 @@
             },
             //分页查询
             findPage() {
+                var param = {
+                    currentPage: this.pagination.currentPage,
+                    pageSize: this.pagination.pageSize,
+                    queryString: this.pagination.queryString
+                }
+                axios.post("/checkgroup/findPage", param).then((res) => {
+                    this.dataList = res.data.rows;
+                    this.pagination.total = res.data.total;
+                });
             },
             // 重置表单
             resetForm() {
@@ -328,9 +337,37 @@
             },
             // 弹出编辑窗口
             handleUpdate(row) {
+                this.dialogFormVisible4Edit = true;
+                //发送请求，进行检查组基本数据回显
+                axios.get("/checkgroup/findById?id=" + row.id).then((res) => {
+                    if (res.data.flag) {
+                        this.formData = res.data.data;
+                    } else {
+                        this.$message.error(res.data.message);
+                    }
+                });
+                //发送axios请求，查询所有检查项
+                axios.get("/checkitem/findAll").then((res) => {
+                    if (res.data.flag) {
+                        this.tableData = res.data.data;
+                        //发送请求，进行检查项数据回想
+                        axios.get("/checkgroup/findCheckItemIdByCheckGroupId?id=" + row.id).then((res) => {
+                            if (res.data.flag) {
+                                this.checkitemIds = res.data.data;
+                            } else {
+                                this.$message.error(res.data.message);
+                            }
+                        });
+                    } else {
+                        this.$message.error(res.data.message);
+                    }
+                });
+
             },
             //切换页码
             handleCurrentChange(currentPage) {
+                this.pagination.currentPage = currentPage;
+                this.findPage();
             },
             // 删除
             handleDelete(row) {

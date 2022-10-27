@@ -7,4 +7,10 @@
         insert into t_checkgroup_checkitem(checkgroup_id, checkitem_id)
         values (#{param.checkGroupId}, #{param.checkItemId})
     </insert>
+
+    <select id="findCheckItemIdByCheckGroupId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select checkitem_id
+        from t_checkgroup_checkitem
+        where checkgroup_id = #{id}
+    </select>
 </mapper>

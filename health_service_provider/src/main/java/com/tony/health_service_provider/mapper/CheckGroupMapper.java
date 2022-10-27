@@ -6,7 +6,11 @@ import com.tony.health_service_provider.domin.CheckGroupRelationParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface CheckGroupMapper extends BaseMapper<CheckGroup> {
     public void setCheckGroupAndCheckItem(@Param("param") CheckGroupRelationParam param);
+
+    public List<Integer> findCheckItemIdByCheckGroupId(Integer id);
 }
