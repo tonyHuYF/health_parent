@@ -70,4 +70,29 @@ public class CheckGroupServiceImpl implements CheckGroupService {
     public List<Integer> findCheckItemIdByCheckGroupId(Integer id) {
         return checkGroupMapper.findCheckItemIdByCheckGroupId(id);
     }
+
+    /**
+     * 编辑
+     */
+    @Override
+    public void edit(CheckGroup checkGroup, Integer[] checkitemIds) {
+        //插入检查组
+        checkGroupMapper.updateById(checkGroup);
+        checkGroupMapper.deleteCheckItemByCheckGroupId(checkGroup.getId());
+        if (ObjectUtil.isNotEmpty(checkitemIds)) {
+            for (Integer checkitemId : checkitemIds) {
+                //插入检查组与检查项关联关系
+                checkGroupMapper.setCheckGroupAndCheckItem(new CheckGroupRelationParam(checkGroup.getId(), checkitemId));
+            }
+        }
+    }
+
+    /**
+     * 删除
+     */
+    @Override
+    public void deleteById(Integer id) {
+        checkGroupMapper.deleteCheckItemByCheckGroupId(id);
+        checkGroupMapper.deleteById(id);
+    }
 }

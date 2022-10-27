@@ -14,4 +14,8 @@ public interface CheckGroupService {
     public List<Integer> findCheckItemIdByCheckGroupId(Integer id);
 
     public PageResult findPage(QueryPageBean queryPageBean);
+
+    public void edit(CheckGroup checkGroup, Integer[] checkitemIds);
+
+    public void deleteById(Integer id);
 }

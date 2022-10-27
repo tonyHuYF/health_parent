@@ -13,4 +13,8 @@ public interface CheckGroupMapper extends BaseMapper<CheckGroup> {
     public void setCheckGroupAndCheckItem(@Param("param") CheckGroupRelationParam param);
 
     public List<Integer> findCheckItemIdByCheckGroupId(Integer id);
+
+    public void deleteCheckItemByCheckGroupId(Integer id);
+
+
 }
