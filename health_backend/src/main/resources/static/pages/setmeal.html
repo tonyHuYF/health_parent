@@ -168,7 +168,7 @@
                                             <el-form-item label="上传图片">
                                                 <el-upload
                                                         class="avatar-uploader"
-                                                        action="/setmeal/upload.do"
+                                                        action="/setmeal/upload"
                                                         :auto-upload="autoUpload"
                                                         name="imgFile"
                                                         :show-file-list="false"
@@ -258,6 +258,13 @@
         methods: {
             //文件上传成功后的钩子，response为服务端返回的值，file为当前上传的文件封装成的js对象
             handleAvatarSuccess(response, file) {
+                this.imageUrl = 'http://rkeg1ivf6.hn-bkt.clouddn.com/' + response.data;
+                this.$message({
+                    type: response.flag ? 'success' : 'error',
+                    message: response.message
+                });
+                //图片名称保存到数据库
+                this.formData.img = response.data;
             },
             //上传图片之前执行
             beforeAvatarUpload(file) {
@@ -273,6 +280,20 @@
             },
             //添加
             handleAdd() {
+                //关闭新增窗口
+                this.dialogFormVisible = false;
+                axios.post("/setmeal/add?checkGroupIds=" + this.checkgroupIds, this.formData).then((res) => {
+                    if (res.data.flag) {
+                        this.$message({
+                            type: 'success',
+                            message: res.data.message
+                        });
+                    } else {
+                        this.$message.error(res.data.message);
+                    }
+                }).finally(() => {
+                    this.findPage();
+                });
             },
             //分页查询
             findPage() {
@@ -281,6 +302,8 @@
             resetForm() {
                 this.formData = {};
                 this.activeName = 'first';
+                this.imageUrl = null;
+                this.checkgroupIds = [];
             },
             // 弹出添加窗口
             handleCreate() {

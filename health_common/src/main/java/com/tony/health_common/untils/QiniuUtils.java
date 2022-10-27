@@ -41,6 +41,33 @@ public class QiniuUtils {
 
 
     /**
+     * 文件上传，以字符串组的新式
+     */
+    public static void upload2Qiniu(byte[] bytes, String fileName) {
+        //构造一个带指定 Region 对象的配置类
+        Configuration cfg = new Configuration(Region.autoRegion());
+        cfg.resumableUploadAPIVersion = Configuration.ResumableUploadAPIVersion.V2;// 指定分片上传版本
+        //...其他参数参考类注释
+        UploadManager uploadManager = new UploadManager(cfg);
+
+        Auth auth = Auth.create(accessKey, secretKey);
+        String upToken = auth.uploadToken(bucket);
+        try {
+            Response response = uploadManager.put(bytes, fileName, upToken);
+            //解析上传成功的结果
+            DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+        } catch (QiniuException ex) {
+            Response r = ex.response;
+            try {
+                System.err.println(r.bodyString());
+            } catch (QiniuException ex2) {
+                //ignore
+            }
+        }
+    }
+
+
+    /**
      * 删除文件
      */
     public static void deleteFileFromQiniu(String fileName) {
