@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: org.apache.commons:commons-compress:1.19">
+  <library name="Maven: io.netty:netty-buffer:4.1.55.Final">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/apache/commons/commons-compress/1.19/commons-compress-1.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/netty/netty-buffer/4.1.55.Final/netty-buffer-4.1.55.Final.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/apache/commons/commons-compress/1.19/commons-compress-1.19-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/netty/netty-buffer/4.1.55.Final/netty-buffer-4.1.55.Final-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/apache/commons/commons-compress/1.19/commons-compress-1.19-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/netty/netty-buffer/4.1.55.Final/netty-buffer-4.1.55.Final-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

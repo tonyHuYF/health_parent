@@ -1,14 +1,18 @@
 package com.tony.health_service_provider.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.tony.health_common.pojo.OrderSetting;
+import com.tony.health_common.vo.OrderSettingVo;
 import com.tony.health_interface.service.OrderSettingService;
 import com.tony.health_service_provider.mapper.OrderSettingMapper;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @DubboService(interfaceClass = OrderSettingService.class)
@@ -36,5 +40,33 @@ public class OrderSettingServiceImpl implements OrderSettingService {
                 }
             }
         }
+    }
+
+    /**
+     * 根据月份获取预约数据，date格式为 yyyy-MM
+     */
+    @Override
+    public List<OrderSettingVo> getOrderSettingByMonth(String date) {
+        List<OrderSettingVo> result = new ArrayList<>();
+
+        if (ObjectUtil.isNotEmpty(date)) {
+            String[] split = date.split("-");
+            //重构入参，将 2022-1 改为 2022-01
+            String fixDate = split[0] + "-" + String.format("%02d", Integer.parseInt(split[1]));
+
+            LambdaQueryWrapper<OrderSetting> wrapper = new LambdaQueryWrapper<>();
+            wrapper.like(OrderSetting::getOrderDate, fixDate);
+
+            List<OrderSetting> orderSettings = orderSettingMapper.selectList(wrapper);
+            orderSettings.forEach(p -> {
+                OrderSettingVo vo = new OrderSettingVo();
+                BeanUtil.copyProperties(p, vo);
+                //截取日期
+                int day = DateUtil.dayOfMonth(p.getOrderDate());
+                vo.setDate(day);
+                result.add(vo);
+            });
+        }
+        return result;
     }
 }

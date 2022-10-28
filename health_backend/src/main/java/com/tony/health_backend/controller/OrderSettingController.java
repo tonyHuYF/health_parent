@@ -4,8 +4,10 @@ import com.tony.health_common.constant.MessageConstant;
 import com.tony.health_common.entity.Result;
 import com.tony.health_common.pojo.OrderSetting;
 import com.tony.health_common.untils.POIUtils;
+import com.tony.health_common.vo.OrderSettingVo;
 import com.tony.health_interface.service.OrderSettingService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,4 +47,19 @@ public class OrderSettingController {
             return new Result(false, MessageConstant.IMPORT_ORDERSETTING_FAIL);
         }
     }
+
+    /**
+     * 根据月份获取预约数据，date格式为 yyyy-MM
+     */
+    @PostMapping("/getOrderSettingByMonth")
+    public Result getOrderSettingByMonth(String date) {
+        try {
+            List<OrderSettingVo> setting = orderSettingService.getOrderSettingByMonth(date);
+            return new Result(true, MessageConstant.GET_ORDERSETTING_SUCCESS, setting);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.GET_ORDERSETTING_FAIL);
+        }
+    }
+
 }
