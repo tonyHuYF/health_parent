@@ -1,7 +1,11 @@
 package com.tony.health_service_provider.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tony.health_common.constant.RedisConstant;
+import com.tony.health_common.entity.PageResult;
+import com.tony.health_common.entity.QueryPageBean;
 import com.tony.health_common.pojo.Setmeal;
 import com.tony.health_interface.service.SetMealService;
 import com.tony.health_service_provider.domin.SetMealRelationParam;
@@ -35,5 +39,21 @@ public class SetMealServiceImpl implements SetMealService {
         }
         //每次上传都将fileName放入redis的 set setmealPicDbResource 中
         stringRedisTemplate.opsForSet().add(RedisConstant.SETMEAL_PIC_DB_RESOURCE, setmeal.getImg());
+    }
+
+    /**
+     * 分页查询
+     */
+    @Override
+    public PageResult findPage(QueryPageBean queryPageBean) {
+        LambdaQueryWrapper<Setmeal> wrapper = new LambdaQueryWrapper<>();
+        if (ObjectUtil.isNotEmpty(queryPageBean.getQueryString())) {
+            wrapper.like(Setmeal::getCode, queryPageBean.getQueryString());
+            wrapper.or().like(Setmeal::getName, queryPageBean.getQueryString());
+            wrapper.or().like(Setmeal::getHelpCode, queryPageBean.getQueryString());
+        }
+        Page<Setmeal> page = setMealMapper.selectPage(
+                new Page<>(queryPageBean.getCurrentPage(), queryPageBean.getPageSize()), wrapper);
+        return new PageResult(page.getTotal(), page.getRecords());
     }
 }

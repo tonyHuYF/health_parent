@@ -3,6 +3,8 @@ package com.tony.health_backend.controller;
 import cn.hutool.core.lang.UUID;
 import com.tony.health_common.constant.MessageConstant;
 import com.tony.health_common.constant.RedisConstant;
+import com.tony.health_common.entity.PageResult;
+import com.tony.health_common.entity.QueryPageBean;
 import com.tony.health_common.entity.Result;
 import com.tony.health_common.pojo.Setmeal;
 import com.tony.health_common.untils.QiniuUtils;
@@ -43,7 +45,7 @@ public class SetMealController {
         try {
             QiniuUtils.upload2Qiniu(imgFile.getBytes(), fileName);
             //每次上传都将fileName放入redis的 set setmealPicResource 中
-            stringRedisTemplate.opsForSet().add(RedisConstant.SETMEAL_PIC_RESOURCE,fileName);
+            stringRedisTemplate.opsForSet().add(RedisConstant.SETMEAL_PIC_RESOURCE, fileName);
         } catch (IOException e) {
             e.printStackTrace();
             return new Result(false, MessageConstant.PIC_UPLOAD_FAIL);
@@ -55,9 +57,9 @@ public class SetMealController {
      * 新增
      */
     @PostMapping("/add")
-    public Result add(@RequestBody Setmeal setmeal,Integer[] checkGroupIds){
+    public Result add(@RequestBody Setmeal setmeal, Integer[] checkGroupIds) {
         try {
-            setMealService.add(setmeal,checkGroupIds);
+            setMealService.add(setmeal, checkGroupIds);
         } catch (Exception e) {
             //调用失败
             e.printStackTrace();
@@ -65,5 +67,13 @@ public class SetMealController {
         }
 
         return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
+    }
+
+    /**
+     * 分页查询
+     */
+    @PostMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+        return setMealService.findPage(queryPageBean);
     }
 }
