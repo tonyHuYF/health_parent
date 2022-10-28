@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: io.netty:netty-codec:4.1.55.Final">
+  <library name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.3.7.RELEASE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/netty/netty-codec/4.1.55.Final/netty-codec-4.1.55.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/boot/spring-boot-autoconfigure/2.3.7.RELEASE/spring-boot-autoconfigure-2.3.7.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/netty/netty-codec/4.1.55.Final/netty-codec-4.1.55.Final-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/boot/spring-boot-autoconfigure/2.3.7.RELEASE/spring-boot-autoconfigure-2.3.7.RELEASE-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/netty/netty-codec/4.1.55.Final/netty-codec-4.1.55.Final-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/boot/spring-boot-autoconfigure/2.3.7.RELEASE/spring-boot-autoconfigure-2.3.7.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

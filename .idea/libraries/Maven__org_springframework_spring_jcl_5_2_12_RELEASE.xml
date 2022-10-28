@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: org.springframework:spring-jcl:5.2.12.RELEASE">
+  <library name="Maven: mysql:mysql-connector-java:8.0.22">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/spring-jcl/5.2.12.RELEASE/spring-jcl-5.2.12.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/spring-jcl/5.2.12.RELEASE/spring-jcl-5.2.12.RELEASE-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/spring-jcl/5.2.12.RELEASE/spring-jcl-5.2.12.RELEASE-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

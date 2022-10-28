@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: com.baomidou:mybatis-plus-annotation:3.5.2">
+  <library name="Maven: org.springframework.data:spring-data-keyvalue:2.3.6.RELEASE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/baomidou/mybatis-plus-annotation/3.5.2/mybatis-plus-annotation-3.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/data/spring-data-keyvalue/2.3.6.RELEASE/spring-data-keyvalue-2.3.6.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/baomidou/mybatis-plus-annotation/3.5.2/mybatis-plus-annotation-3.5.2-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/data/spring-data-keyvalue/2.3.6.RELEASE/spring-data-keyvalue-2.3.6.RELEASE-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/baomidou/mybatis-plus-annotation/3.5.2/mybatis-plus-annotation-3.5.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/data/spring-data-keyvalue/2.3.6.RELEASE/spring-data-keyvalue-2.3.6.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

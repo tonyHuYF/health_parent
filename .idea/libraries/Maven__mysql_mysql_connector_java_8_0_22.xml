@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: io.lettuce:lettuce-core:6.1.8.RELEASE">
+  <library name="Maven: mysql:mysql-connector-java:8.0.22">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/lettuce/lettuce-core/6.1.8.RELEASE/lettuce-core-6.1.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/lettuce/lettuce-core/6.1.8.RELEASE/lettuce-core-6.1.8.RELEASE-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/io/lettuce/lettuce-core/6.1.8.RELEASE/lettuce-core-6.1.8.RELEASE-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/mysql/mysql-connector-java/8.0.22/mysql-connector-java-8.0.22-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
