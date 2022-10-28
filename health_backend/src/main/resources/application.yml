@@ -28,6 +28,8 @@ dubbo:
     timeout: 60000
   consumer:
     check: false
+    ## 设置调用服务超时时间 10s
+    timeout: 10000
 
 mybatis-plus:
   configuration:

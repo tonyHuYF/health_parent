@@ -34,6 +34,9 @@ dubbo:
     port: 20880
   scan:
     base-packages: com.tony.health_service_provider.service
+    ## 设置提供服务超时时间 60s
+  provider:
+    timeout: 10000
 
 mybatis-plus:
   configuration:
