@@ -9,4 +9,8 @@ public interface SetMealService {
 
     public PageResult findPage(QueryPageBean queryPageBean);
 
+    public void edit(Setmeal setmeal,Integer[] checkGroupIds);
+
+    public void deleteById(Integer id);
+
 }

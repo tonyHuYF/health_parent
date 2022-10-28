@@ -56,4 +56,29 @@ public class SetMealServiceImpl implements SetMealService {
                 new Page<>(queryPageBean.getCurrentPage(), queryPageBean.getPageSize()), wrapper);
         return new PageResult(page.getTotal(), page.getRecords());
     }
+
+
+    /**
+     * 编辑
+     */
+    @Override
+    public void edit(Setmeal setmeal, Integer[] checkGroupIds) {
+        setMealMapper.updateById(setmeal);
+        setMealMapper.deleteCheckGroupBySetMealId(setmeal.getId());
+        if (ObjectUtil.isNotEmpty(checkGroupIds)) {
+            for (Integer checkGroupId : checkGroupIds) {
+                setMealMapper.setSetMealAndCheckGroup(new SetMealRelationParam(setmeal.getId(), checkGroupId));
+            }
+        }
+    }
+
+
+    /**
+     * 删除
+     */
+    @Override
+    public void deleteById(Integer id) {
+        setMealMapper.deleteCheckGroupBySetMealId(id);
+        setMealMapper.deleteById(id);
+    }
 }

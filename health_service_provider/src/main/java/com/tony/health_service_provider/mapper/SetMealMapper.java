@@ -9,4 +9,6 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface SetMealMapper extends BaseMapper<Setmeal> {
     public void setSetMealAndCheckGroup(@Param("param") SetMealRelationParam param);
+
+    public void deleteCheckGroupBySetMealId(Integer id);
 }

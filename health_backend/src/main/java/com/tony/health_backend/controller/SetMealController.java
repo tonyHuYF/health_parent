@@ -76,4 +76,37 @@ public class SetMealController {
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
         return setMealService.findPage(queryPageBean);
     }
+
+    /**
+     * 编辑
+     */
+    @PostMapping("/edit")
+    public Result edit(@RequestBody Setmeal setmeal, Integer[] checkGroupIds) {
+        try {
+            setMealService.edit(setmeal, checkGroupIds);
+        } catch (Exception e) {
+            //调用失败
+            e.printStackTrace();
+            return new Result(false, MessageConstant.EDIT_SETMEAL_FAIL);
+        }
+
+        return new Result(true, MessageConstant.EDIT_SETMEAL_SUCCESS);
+    }
+
+    /**
+     * 删除
+     */
+    @GetMapping("/delete")
+    public Result delete(Integer id) {
+        try {
+            setMealService.deleteById(id);
+        } catch (Exception e) {
+            //调用失败
+            e.printStackTrace();
+            return new Result(false, MessageConstant.DELETE_SETMEAL_FAIL);
+        }
+
+        return new Result(true, MessageConstant.DELETE_SETMEAL_SUCCESS);
+    }
+
 }
