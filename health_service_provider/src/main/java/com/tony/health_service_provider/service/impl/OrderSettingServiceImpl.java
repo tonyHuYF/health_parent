@@ -69,4 +69,25 @@ public class OrderSettingServiceImpl implements OrderSettingService {
         }
         return result;
     }
+
+    /**
+     * 根据具体日期，设置预约人数
+     */
+    @Override
+    public void editNumberByDate(OrderSetting orderSetting) {
+        LambdaQueryWrapper<OrderSetting> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(OrderSetting::getOrderDate,  orderSetting.getOrderDate());
+
+        Long count = orderSettingMapper.selectCount(wrapper);
+
+        if (count > 0) {
+            //已设置，做更改
+            OrderSetting setting = orderSettingMapper.selectOne(wrapper);
+            setting.setNumber(orderSetting.getNumber());
+            orderSettingMapper.updateById(setting);
+        } else {
+            //做插入
+            orderSettingMapper.insert(orderSetting);
+        }
+    }
 }

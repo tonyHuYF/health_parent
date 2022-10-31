@@ -3,6 +3,7 @@ package com.tony.health_common.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,12 +14,13 @@ import java.util.Date;
  */
 @Data
 @TableName("t_ordersetting")
-public class OrderSetting implements Serializable{
+public class OrderSetting implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id ;
+    private Integer id;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date orderDate;//预约设置日期
     private int number;//可预约人数
-    private int reservations ;//已预约人数
+    private int reservations;//已预约人数
 
     public OrderSetting() {
     }
