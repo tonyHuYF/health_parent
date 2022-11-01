@@ -1,0 +1,20 @@
+2022-10-31 22:10:06.725 [main-EventThread] ERROR o.a.c.f.recipes.cache.TreeCache -
+java.lang.IllegalStateException: instance must be started before calling this method
+	at org.apache.curator.shaded.com.google.common.base.Preconditions.checkState(Preconditions.java:444)
+	at org.apache.curator.framework.imps.CuratorFrameworkImpl.getChildren(CuratorFrameworkImpl.java:456)
+	at org.apache.curator.framework.recipes.cache.TreeCache$TreeNode.doRefreshChildren(TreeCache.java:261)
+	at org.apache.curator.framework.recipes.cache.TreeCache$TreeNode.refreshChildren(TreeCache.java:247)
+	at org.apache.curator.framework.recipes.cache.TreeCache$TreeNode.process(TreeCache.java:352)
+	at org.apache.curator.framework.imps.NamespaceWatcher.process(NamespaceWatcher.java:77)
+	at org.apache.zookeeper.ClientCnxn$EventThread.processEvent(ClientCnxn.java:533)
+	at org.apache.zookeeper.ClientCnxn$EventThread.run(ClientCnxn.java:508)
+2022-10-31 22:32:08.024 [main-EventThread] ERROR o.a.c.f.recipes.cache.TreeCache -
+java.lang.IllegalStateException: instance must be started before calling this method
+	at org.apache.curator.shaded.com.google.common.base.Preconditions.checkState(Preconditions.java:444)
+	at org.apache.curator.framework.imps.CuratorFrameworkImpl.getChildren(CuratorFrameworkImpl.java:456)
+	at org.apache.curator.framework.recipes.cache.TreeCache$TreeNode.doRefreshChildren(TreeCache.java:261)
+	at org.apache.curator.framework.recipes.cache.TreeCache$TreeNode.refreshChildren(TreeCache.java:247)
+	at org.apache.curator.framework.recipes.cache.TreeCache$TreeNode.process(TreeCache.java:352)
+	at org.apache.curator.framework.imps.NamespaceWatcher.process(NamespaceWatcher.java:77)
+	at org.apache.zookeeper.ClientCnxn$EventThread.processEvent(ClientCnxn.java:533)
+	at org.apache.zookeeper.ClientCnxn$EventThread.run(ClientCnxn.java:508)

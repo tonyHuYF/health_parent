@@ -1,0 +1,36 @@
+server:
+  port: 9006
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://175.178.108.7:3306/health?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&serverTimezone=Hongkong&allowMultiQueries=true&nullCatalogMeansCurrent=true
+      username: root
+      password: TT9pC9oNq8y!&BMq
+  redis:
+    host: 175.178.108.7
+    port: 6379
+    password: BHuEqwbXF6euRKYq
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 1
+        time-between-eviction-runs: 10s
+
+dubbo:
+  application:
+    name: health-mobile
+  registry:
+    address: zookeeper://175.178.108.7:2181
+    ## 设置连接超时时间 60s
+    timeout: 60000
+  consumer:
+    check: false
+    ## 设置调用服务超时时间 10s
+    timeout: 10000
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
