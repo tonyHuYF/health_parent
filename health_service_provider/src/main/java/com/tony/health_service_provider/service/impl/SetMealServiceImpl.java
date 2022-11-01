@@ -15,6 +15,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @DubboService(interfaceClass = SetMealService.class)
 @Transactional
@@ -80,5 +81,13 @@ public class SetMealServiceImpl implements SetMealService {
     public void deleteById(Integer id) {
         setMealMapper.deleteCheckGroupBySetMealId(id);
         setMealMapper.deleteById(id);
+    }
+
+    /**
+     * 获取所有套餐
+     */
+    @Override
+    public List<Setmeal> getAllSetmeal() {
+        return setMealMapper.selectList(null);
     }
 }

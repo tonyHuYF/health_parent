@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="Maven: com.zaxxer:HikariCP:3.4.5">
+  <library name="Maven: org.springframework.data:spring-data-commons:2.3.6.RELEASE">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/zaxxer/HikariCP/3.4.5/HikariCP-3.4.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/data/spring-data-commons/2.3.6.RELEASE/spring-data-commons-2.3.6.RELEASE.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/zaxxer/HikariCP/3.4.5/HikariCP-3.4.5-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/data/spring-data-commons/2.3.6.RELEASE/spring-data-commons-2.3.6.RELEASE-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/zaxxer/HikariCP/3.4.5/HikariCP-3.4.5-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/org/springframework/data/spring-data-commons/2.3.6.RELEASE/spring-data-commons-2.3.6.RELEASE-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
