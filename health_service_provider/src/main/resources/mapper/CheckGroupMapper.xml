@@ -19,4 +19,5 @@
         from t_checkgroup_checkitem
         where checkgroup_id = #{id}
     </delete>
+
 </mapper>

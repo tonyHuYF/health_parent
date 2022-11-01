@@ -16,5 +16,4 @@ public interface CheckGroupMapper extends BaseMapper<CheckGroup> {
 
     public void deleteCheckItemByCheckGroupId(Integer id);
 
-
 }

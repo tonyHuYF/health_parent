@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.tencentcloudapi:tencentcloud-sdk-java:3.1.619">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/tencentcloudapi/tencentcloud-sdk-java/3.1.619/tencentcloud-sdk-java-3.1.619.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/tencentcloudapi/tencentcloud-sdk-java/3.1.619/tencentcloud-sdk-java-3.1.619-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../Program Files/localMavenRepoistory/repository/com/tencentcloudapi/tencentcloud-sdk-java/3.1.619/tencentcloud-sdk-java-3.1.619-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

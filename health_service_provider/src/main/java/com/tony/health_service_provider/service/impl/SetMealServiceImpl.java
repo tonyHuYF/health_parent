@@ -6,9 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tony.health_common.constant.RedisConstant;
 import com.tony.health_common.entity.PageResult;
 import com.tony.health_common.entity.QueryPageBean;
+import com.tony.health_common.pojo.CheckGroup;
+import com.tony.health_common.pojo.CheckItem;
 import com.tony.health_common.pojo.Setmeal;
 import com.tony.health_interface.service.SetMealService;
 import com.tony.health_service_provider.domin.SetMealRelationParam;
+import com.tony.health_service_provider.mapper.CheckGroupMapper;
+import com.tony.health_service_provider.mapper.CheckItemMapper;
 import com.tony.health_service_provider.mapper.SetMealMapper;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -24,6 +28,10 @@ public class SetMealServiceImpl implements SetMealService {
     private SetMealMapper setMealMapper;
     @Resource
     private StringRedisTemplate stringRedisTemplate;
+    @Resource
+    private CheckGroupMapper checkGroupMapper;
+    @Resource
+    private CheckItemMapper checkItemMapper;
 
     /**
      * 新增
@@ -89,5 +97,31 @@ public class SetMealServiceImpl implements SetMealService {
     @Override
     public List<Setmeal> getAllSetmeal() {
         return setMealMapper.selectList(null);
+    }
+
+    /**
+     * 获取指定Id套餐详情
+     */
+    @Override
+    public Setmeal findById(Integer id) {
+        Setmeal setmeal = setMealMapper.selectById(id);
+        if(ObjectUtil.isNotEmpty(setmeal)){
+            //查询检查组
+            List<CheckGroup> checkGroups = setMealMapper.selectCheckGroupBySetMealId(id);
+
+            if(ObjectUtil.isNotEmpty(checkGroups)){
+                //查询检查组对应的各检查项
+                checkGroups.forEach(p->{
+                    List<Integer> checkItemIds = checkGroupMapper.findCheckItemIdByCheckGroupId(p.getId());
+                    List<CheckItem> checkItems = checkItemMapper.selectList(
+                            new LambdaQueryWrapper<CheckItem>().in(CheckItem::getId, checkItemIds));
+                    if (ObjectUtil.isNotEmpty(checkItems)){
+                        p.setCheckItems(checkItems);
+                    }
+                });
+                setmeal.setCheckGroups(checkGroups);
+            }
+        }
+        return setmeal;
     }
 }

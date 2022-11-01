@@ -17,4 +17,6 @@ public interface SetMealService {
 
     public List<Setmeal> getAllSetmeal();
 
+    public Setmeal findById(Integer id);
+
 }

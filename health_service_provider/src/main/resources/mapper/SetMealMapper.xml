@@ -11,4 +11,9 @@
         from t_setmeal_checkgroup
         where setmeal_id = #{id}
     </delete>
+    <select id="selectCheckGroupBySetMealId" parameterType="java.lang.Integer" resultType="com.tony.health_common.pojo.CheckGroup">
+        SELECT tc.*
+        FROM t_checkgroup tc
+        INNER JOIN t_setmeal_checkgroup tsc on tsc.checkgroup_id=tc.id and tsc.setmeal_id = #{id}
+    </select>
 </mapper>
