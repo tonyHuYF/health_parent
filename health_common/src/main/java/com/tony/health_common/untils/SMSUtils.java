@@ -13,11 +13,22 @@ import com.tencentcloudapi.sms.v20210111.models.SendSmsResponse;
  * 短信发送工具类
  */
 public class SMSUtils {
-    public static final String VALIDATE_CODE = "SMS_159620392";//发送短信验证码
-    public static final String ORDER_NOTICE = "SMS_159771588";//
+
+//    测试例子
+//    String[] param = {ValidateCodeUtils.generateValidateCode(6) + "","5"};
+//    SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE_2, "13922532793", param);
+//
+//    String[] param = {ValidateCodeUtils.generateValidateCode(6) + ""};
+//    SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE_1, "13922532793", param);
+
+    public static final String VALIDATE_CODE_1 = "1592206";//发送短信验证码_模板1 1个参数
+    public static final String VALIDATE_CODE_2 = "1592992";//发送短信验证码_模板2 2个参数
 
     public static final String SECRET_ID = "AKIDWtDOVdjbFiy0obWGoAPXUBbu5vWszsW4";
     public static final String SECRET_KEY = "c1DE4fz476aqseBTindEhxynS6ieQ0MU";//
+
+    public static final String SDK_APP_ID = "1400757788";
+    public static final String SIGN_NAME = "Java乐乐个人公众号";
 
     /**
      * 发送短信
@@ -26,7 +37,7 @@ public class SMSUtils {
      * @param param
      * @throws ClientException
      */
-    public static void sendShortMessage(String templateCode, String phoneNumbers, String param) throws TencentCloudSDKException {
+    public static void sendShortMessage(String templateCode, String phoneNumbers, String[] param) throws TencentCloudSDKException {
         /* 必要步骤：
          * 实例化一个认证对象，入参需要传入腾讯云账户密钥对secretId，secretKey。
          * 这里采用的是从环境变量读取的方式，需要在环境变量中先设置这两个值。
@@ -74,13 +85,11 @@ public class SMSUtils {
 
         /* 短信应用ID: 短信SdkAppId在 [短信控制台] 添加应用后生成的实际SdkAppId，示例如1400006666 */
         // 应用 ID 可前往 [短信控制台](https://console.cloud.tencent.com/smsv2/app-manage) 查看
-        String sdkAppId = "1400009099";
-        req.setSmsSdkAppId(sdkAppId);
+        req.setSmsSdkAppId(SDK_APP_ID);
 
         /* 短信签名内容: 使用 UTF-8 编码，必须填写已审核通过的签名 */
         // 签名信息可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-sign) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-sign) 的签名管理查看
-        String signName = "腾讯云";
-        req.setSignName(signName);
+        req.setSignName(SIGN_NAME);
 
         /* 模板 ID: 必须填写已审核通过的模板 ID */
         // 模板 ID 可前往 [国内短信](https://console.cloud.tencent.com/smsv2/csms-template) 或 [国际/港澳台短信](https://console.cloud.tencent.com/smsv2/isms-template) 的正文模板管理查看
@@ -88,8 +97,7 @@ public class SMSUtils {
         req.setTemplateId(templateId);
 
         /* 模板参数: 模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致，若无模板参数，则设置为空 */
-        String[] templateParamSet = {param};
-        req.setTemplateParamSet(templateParamSet);
+        req.setTemplateParamSet(param);
 
         /* 下发手机号码，采用 E.164 标准，+[国家或地区码][手机号]
          * 示例如：+8613711112222， 其中前面有一个+号 ，86为国家码，13711112222为手机号，最多不要超过200个手机号 */
