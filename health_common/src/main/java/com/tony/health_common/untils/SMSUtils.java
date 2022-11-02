@@ -23,6 +23,7 @@ public class SMSUtils {
 
     public static final String VALIDATE_CODE_1 = "1592206";//发送短信验证码_模板1 1个参数
     public static final String VALIDATE_CODE_2 = "1592992";//发送短信验证码_模板2 2个参数
+    public static final String ORDER_CODE = "1594030";//预约成功短信 1个参数
 
     public static final String SECRET_ID = "AKIDWtDOVdjbFiy0obWGoAPXUBbu5vWszsW4";
     public static final String SECRET_KEY = "c1DE4fz476aqseBTindEhxynS6ieQ0MU";//
