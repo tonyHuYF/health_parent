@@ -14,12 +14,21 @@ import com.tony.health_service_provider.domin.SetMealRelationParam;
 import com.tony.health_service_provider.mapper.CheckGroupMapper;
 import com.tony.health_service_provider.mapper.CheckItemMapper;
 import com.tony.health_service_provider.mapper.SetMealMapper;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @DubboService(interfaceClass = SetMealService.class)
 @Transactional
@@ -32,6 +41,10 @@ public class SetMealServiceImpl implements SetMealService {
     private CheckGroupMapper checkGroupMapper;
     @Resource
     private CheckItemMapper checkItemMapper;
+    @Resource
+    private FreeMarkerConfigurer configurer;
+    @Value("${spring.freemarker.out-put-path}")
+    private String outPutPath;
 
     /**
      * 新增
@@ -48,6 +61,9 @@ public class SetMealServiceImpl implements SetMealService {
         }
         //每次上传都将fileName放入redis的 set setmealPicDbResource 中
         stringRedisTemplate.opsForSet().add(RedisConstant.SETMEAL_PIC_DB_RESOURCE, setmeal.getImg());
+
+        //当添加套餐后生成静态页面(套餐列表、套餐详情)
+        generateMobileStaticHtml();
     }
 
     /**
@@ -105,17 +121,17 @@ public class SetMealServiceImpl implements SetMealService {
     @Override
     public Setmeal findById(Integer id) {
         Setmeal setmeal = setMealMapper.selectById(id);
-        if(ObjectUtil.isNotEmpty(setmeal)){
+        if (ObjectUtil.isNotEmpty(setmeal)) {
             //查询检查组
             List<CheckGroup> checkGroups = setMealMapper.selectCheckGroupBySetMealId(id);
 
-            if(ObjectUtil.isNotEmpty(checkGroups)){
+            if (ObjectUtil.isNotEmpty(checkGroups)) {
                 //查询检查组对应的各检查项
-                checkGroups.forEach(p->{
+                checkGroups.forEach(p -> {
                     List<Integer> checkItemIds = checkGroupMapper.findCheckItemIdByCheckGroupId(p.getId());
                     List<CheckItem> checkItems = checkItemMapper.selectList(
                             new LambdaQueryWrapper<CheckItem>().in(CheckItem::getId, checkItemIds));
-                    if (ObjectUtil.isNotEmpty(checkItems)){
+                    if (ObjectUtil.isNotEmpty(checkItems)) {
                         p.setCheckItems(checkItems);
                     }
                 });
@@ -124,4 +140,53 @@ public class SetMealServiceImpl implements SetMealService {
         }
         return setmeal;
     }
+
+    /**
+     * 通用方法：生成静态页面
+     */
+    public void generateHtml(String templateName, String htmlPageName, Map map) {
+        Configuration configuration = configurer.getConfiguration();
+        Writer out = null;
+        try {
+            Template template = configuration.getTemplate(templateName);
+            out = new FileWriter(new File(outPutPath + "/" + htmlPageName));
+            template.process(map, out);
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 生成套餐列表页面
+     */
+    public void generateMobileSetmealListHtml(List<Setmeal> list) {
+        Map map = new HashMap();
+        map.put("setmealList", list);
+
+        generateHtml("mobile_setmeal.ftl", "m_setmeal.html", map);
+    }
+
+    /**
+     * 生成套餐详情页面
+     */
+    public void generateMobileSetmealDetailHtml(List<Setmeal> list) {
+        for (Setmeal setmeal : list) {
+            Map map = new HashMap();
+            map.put("setmeal", findById(setmeal.getId()));
+            generateHtml("mobile_setmeal_detail.ftl", "setmeal_detail_" + setmeal.getId() + ".html", map);
+        }
+    }
+
+    /**
+     * 生成当前方法所需的页面
+     */
+    public void generateMobileStaticHtml() {
+        List<Setmeal> list = getAllSetmeal();
+
+        generateMobileSetmealListHtml(list);
+
+        generateMobileSetmealDetailHtml(list);
+    }
+
 }

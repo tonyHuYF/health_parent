@@ -18,6 +18,9 @@ spring:
         max-idle: 10
         min-idle: 1
         time-between-eviction-runs: 10s
+  freemarker:
+    template-loader-path: classpath:/template/ftl
+    out-put-path: D:/Users/TonyHu/IdeaProjects/health_parent/health_mobile/src/main/resources/static/pages
 
 ## 配置dubbo
 dubbo:
