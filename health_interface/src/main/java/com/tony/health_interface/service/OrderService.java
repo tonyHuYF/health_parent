@@ -6,4 +6,6 @@ import java.util.Map;
 
 public interface OrderService {
     public Result order(Map map);
+
+    public Map findById(Integer id);
 }

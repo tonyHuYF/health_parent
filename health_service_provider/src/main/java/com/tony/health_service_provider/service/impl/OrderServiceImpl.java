@@ -1,6 +1,7 @@
 package com.tony.health_service_provider.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.tony.health_common.constant.MessageConstant;
@@ -8,7 +9,9 @@ import com.tony.health_common.entity.Result;
 import com.tony.health_common.pojo.Member;
 import com.tony.health_common.pojo.Order;
 import com.tony.health_common.pojo.OrderSetting;
+import com.tony.health_common.pojo.Setmeal;
 import com.tony.health_interface.service.OrderService;
+import com.tony.health_interface.service.SetMealService;
 import com.tony.health_service_provider.mapper.MemberMapper;
 import com.tony.health_service_provider.mapper.OrderMapper;
 import com.tony.health_service_provider.mapper.OrderSettingMapper;
@@ -17,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +33,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderSettingMapper orderSettingMapper;
     @Resource
     private MemberMapper memberMapper;
+    @Resource
+    private SetMealService setMealService;
 
     /**
      * 新增
@@ -86,5 +92,23 @@ public class OrderServiceImpl implements OrderService {
         orderSettingMapper.updateById(orderSetting);
 
         return new Result(true, MessageConstant.ORDER_SUCCESS, order.getId());
+    }
+
+    /**
+     * 根据Id查询订单信息
+     */
+
+    @Override
+    public Map findById(Integer id) {
+        Order order = orderMapper.selectById(id);
+        Member member = memberMapper.selectById(order.getMemberId());
+        Setmeal setmeal = setMealService.findById(order.getSetmealId());
+        Map map = new HashMap<>();
+        map.put("member", member.getName());
+        map.put("setmeal", setmeal.getName());
+        map.put("orderDate", DateUtil.formatDate(order.getOrderDate()));
+        map.put("orderType", order.getOrderType());
+
+        return map;
     }
 }

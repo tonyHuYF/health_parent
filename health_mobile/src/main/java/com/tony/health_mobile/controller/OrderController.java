@@ -63,4 +63,20 @@ public class OrderController {
             return new Result(false, MessageConstant.VALIDATECODE_ERROR);
         }
     }
+
+    /**
+     * 根据Id查询订单
+     */
+    @PostMapping("/findById")
+    public Result findById(Integer id) {
+        try {
+            Map map = orderService.findById(id);
+            return new Result(true, MessageConstant.QUERY_ORDER_SUCCESS, map);
+        } catch (Exception e) {
+            //调用失败
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_ORDER_FAIL);
+        }
+
+    }
 }
