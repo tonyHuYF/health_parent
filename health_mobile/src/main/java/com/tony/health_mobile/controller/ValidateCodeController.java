@@ -42,4 +42,24 @@ public class ValidateCodeController {
             return new Result(false, MessageConstant.SEND_VALIDATECODE_FAIL);
         }
     }
+
+    /**
+     * 手机快速登录发送验证码
+     */
+    @PostMapping("/send4Login")
+    public Result send4Login(String telephone) {
+        try {
+            //发送验证码
+            String code = ValidateCodeUtils.generateValidateCode(6) + "";
+            String[] param = {code, "5"};
+            SMSUtils.sendShortMessage(SMSUtils.VALIDATE_CODE_2, telephone, param);
+
+            //保存验证码
+            stringRedisTemplate.opsForValue().set(telephone + RedisMessageConstant.SENDTYPE_LOGIN, code, 60 * 5, TimeUnit.SECONDS);
+            return new Result(true, MessageConstant.SEND_VALIDATECODE_SUCCESS);
+        } catch (TencentCloudSDKException e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.SEND_VALIDATECODE_FAIL);
+        }
+    }
 }
