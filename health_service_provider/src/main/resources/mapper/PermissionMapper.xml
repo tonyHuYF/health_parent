@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tony.health_service_provider.mapper.PermissionMapper">
+
+    <select id="queryPermissionByRoleId" parameterType="java.lang.Integer"
+            resultType="com.tony.health_common.pojo.Permission">
+        select tp.*
+        from t_permission tp
+                 inner join t_role_permission trp on trp.permission_id = tp.id
+        where trp.role_id = #{roleId}
+    </select>
+
+</mapper>

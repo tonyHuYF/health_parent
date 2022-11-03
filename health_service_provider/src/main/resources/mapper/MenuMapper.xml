@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tony.health_service_provider.mapper.MenuMapper">
+
+    <select id="queryMenuByRoleId" parameterType="java.lang.Integer" resultType="com.tony.health_common.pojo.Menu">
+        select tm.*
+        from t_menu tm
+                 inner join t_role_menu trm on trm.menu_id = tm.id
+        where trm.role_id = #{roleId}
+    </select>
+</mapper>

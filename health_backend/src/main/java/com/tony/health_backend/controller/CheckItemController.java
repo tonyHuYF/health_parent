@@ -7,6 +7,7 @@ import com.tony.health_common.entity.Result;
 import com.tony.health_common.pojo.CheckItem;
 import com.tony.health_interface.service.CheckItemService;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -51,6 +52,7 @@ public class CheckItemController {
      * 删除
      */
     @GetMapping("/delete")
+    @PreAuthorize("hasAuthority('CHECKITEM_DELETE')")
     public Result delete(Integer id) {
         try {
             checkItemService.deleteById(id);
