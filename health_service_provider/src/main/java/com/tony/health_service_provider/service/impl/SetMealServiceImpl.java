@@ -189,4 +189,11 @@ public class SetMealServiceImpl implements SetMealService {
         generateMobileSetmealDetailHtml(list);
     }
 
+    /**
+     * 获取套餐数量
+     */
+    @Override
+    public List<Map<String, Object>> findSetmealCount() {
+        return setMealMapper.findSetmealCount();
+    }
 }

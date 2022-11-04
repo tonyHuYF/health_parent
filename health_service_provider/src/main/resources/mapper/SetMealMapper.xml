@@ -11,9 +11,25 @@
         from t_setmeal_checkgroup
         where setmeal_id = #{id}
     </delete>
-    <select id="selectCheckGroupBySetMealId" parameterType="java.lang.Integer" resultType="com.tony.health_common.pojo.CheckGroup">
+    <select id="selectCheckGroupBySetMealId" parameterType="java.lang.Integer"
+            resultType="com.tony.health_common.pojo.CheckGroup">
         SELECT tc.*
         FROM t_checkgroup tc
-        INNER JOIN t_setmeal_checkgroup tsc on tsc.checkgroup_id=tc.id and tsc.setmeal_id = #{id}
+                 INNER JOIN t_setmeal_checkgroup tsc on tsc.checkgroup_id = tc.id and tsc.setmeal_id = #{id}
+    </select>
+    <select id="findSetmealCount" resultType="java.util.Map">
+        select s.name, count(o.id) value
+        from t_order o
+            inner join t_setmeal s
+        on s.id = o.setmeal_id
+        group by s.name
+    </select>
+    <select id="findTop2Setmeal" resultType="java.util.Map">
+        select s.name, count(o.id) as setmeal_count, round(count(o.id) / (select count(*) from t_order), 2) as proportion
+        from t_order o
+                 inner join t_setmeal s
+                            on s.id = o.setmeal_id
+        group by s.name
+        order by setmeal_count desc limit 0, 2
     </select>
 </mapper>
